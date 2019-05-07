@@ -28,7 +28,7 @@ class MessageHandler(BaseHTTPRequestHandler):
         conLength = int(headers.get('content-length',0))
 
         # 2. Read the correct amount of data from the request.
-
+        requestData = self.rfile.read(conLength)
         # 3. Extract the "message" field from the request data.
 
         # Send the "message" field back as the response.
@@ -38,6 +38,8 @@ class MessageHandler(BaseHTTPRequestHandler):
         #self.wfile.write(message.encode())
         self.wfile.write("Content-Length: ".encode())
         self.wfile.write(str(conLength).encode())
+        self.wfile.write("Request Data: ".encode())
+        self.wfile.write(str(requestData).encode())
 
 if __name__ == '__main__':
     server_address = ('', 8000)
