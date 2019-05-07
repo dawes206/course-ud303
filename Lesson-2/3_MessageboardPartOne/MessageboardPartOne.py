@@ -25,7 +25,7 @@ class MessageHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         # 1. How long was the message? (Use the Content-Length header.)
         headers = self.headers
-        conLength = int(headers['content-length'])
+        conLength = int(headers.get('content-length',0))
 
         # 2. Read the correct amount of data from the request.
 
@@ -37,7 +37,7 @@ class MessageHandler(BaseHTTPRequestHandler):
         self.end_headers()
         #self.wfile.write(message.encode())
         self.wfile.write("Content-Length: ".encode())
-        self.wfile.write(conLength.encode())
+        self.wfile.write(str(conLength).encode())
 
 if __name__ == '__main__':
     server_address = ('', 8000)
