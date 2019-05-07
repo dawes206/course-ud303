@@ -28,24 +28,26 @@ class MessageHandler(BaseHTTPRequestHandler):
         conLength = int(headers.get('content-length',0))
 
         # 2. Read the correct amount of data from the request.
-        requestData = self.rfile.read(conLength).decode()
+        requestData = self.rfile.read(conLength).decode() #turns message body into string
         
         # 3. Extract the "message" field from the request data.
-        message = requestData[requestData.find('=')+1:]
+        #message = requestData[requestData.find('=')+1:] #only manipulates string (keeping %21, not !)
+        messageDict = parse_qs(requestData) #translates the message body %21 into !
+        message = messageDict['message'][0]   #parse_qs returns a dictionary of dicatiory with lists, not strings, as values. Need [0] to index first value in list
         
         # Send the "message" field back as the response.
         self.send_response(200)
         self.send_header('Content-type', 'text/plain; charset=utf-8')
         self.end_headers()
         #self.wfile.write(message.encode())
-        self.wfile.write("Content-Length: ".encode())
-        self.wfile.write(str(conLength).encode())
-        self.wfile.write('\n'.encode())
-        self.wfile.write("Request Data: ".encode())
-        self.wfile.write(requestData.encode())
-        self.wfile.write('\n'.encode())
-        self.wfile.write('Message: '.encode())
-        self.wfile.write(message.encode())
+        #self.wfile.write("Content-Length: ".encode())
+        #self.wfile.write(str(conLength).encode())
+        #self.wfile.write('\n'.encode())
+        #self.wfile.write("Request Data: ".encode())
+        #self.wfile.write(requestData.encode())
+        #self.wfile.write('\n'.encode())
+        #self.wfile.write('Message: '.encode())
+        self.wfile.write(message.encode()) #turn message, including ! into bytes to send to browser.
 
 if __name__ == '__main__':
     server_address = ('', 8000)
