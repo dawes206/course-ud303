@@ -1,0 +1,19 @@
+Working on figuring out response/request format
+
+
+So, createing a server to test the send_header stuff.
+Ran it with py
+Connected to it with ncat 127.0.0.1 8000
+Sent it a GET request. No other headers.
+Server sent a response that included all the headers I wanted to send. GREAT!
+
+
+
+Trying to create a server from "scratch" to send hello in response body
+Use ncat -l and ncat hostname to communicate and formulate what I need to send
+
+It worked!
+
+
+
+Super annoying. For some reason, now ncat 127.0.0.1 8000 isn't working. It'll work on other ports, but not this one. I think this is because the poret may be "filled up". But definitely extremely obnoxious
