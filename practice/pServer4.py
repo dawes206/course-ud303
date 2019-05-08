@@ -15,7 +15,7 @@ class HelloHandler(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/plain')
         self.end_headers()
 
-        self.wfile.write('test'.encode())
+        self.wfile.write(self.path.encode())
 
     
 if __name__ == '__main__':

@@ -17,3 +17,7 @@ It worked!
 
 
 Super annoying. For some reason, now ncat 127.0.0.1 8000 isn't working. It'll work on other ports, but not this one. I think this is because the poret may be "filled up". But definitely extremely obnoxious
+
+I was trying to send self.path in the request body. I was able to send a hello message no problem. Assuming self.path is the variable I need, it should send no problem.
+IT WORKED! And self.path was the variable I needed. Once 8000 was "cleared" no problems.
+Now I can continue on ECHO SERVER lesson
