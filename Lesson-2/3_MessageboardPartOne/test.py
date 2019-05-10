@@ -41,6 +41,7 @@ def test_POST():
     else:
         print("POST request succeeded.")
         return None
+    hold = input('hit enter')
 
 
 if __name__ == '__main__':

@@ -21,3 +21,65 @@ Super annoying. For some reason, now ncat 127.0.0.1 8000 isn't working. It'll wo
 I was trying to send self.path in the request body. I was able to send a hello message no problem. Assuming self.path is the variable I need, it should send no problem.
 IT WORKED! And self.path was the variable I needed. Once 8000 was "cleared" no problems.
 Now I can continue on ECHO SERVER lesson
+
+
+Gonna try to practice using urllib.parse, AND learn more about message by making a server that reads the message body of the incoming get request (that I will make have a web address), and respond with the data displayed well
+We'll try...https://www.google.com/search?q=gray+squirrel&tbm=isch
+Ok. Might not work exaclty has I hoped. Mostly because urlparse makes an object, so it's going to be kinda annoying to get ALL the attributes I need.....
+Lets start simple - print just one attribute to make sure your code works- then lets do a loop to print ALL of them
+Get request....
+Get / HTTP/1.1
+Content-length:23
+
+https://www.google.com/
+^It worked! (once I remembered to decode the results of rfile.read)
+
+Cool. So, I am successfully able to read the get request body, parse it, operate on it, and re-send it in a response body.
+Now I want to do it with more of the parsed-object attributes
+Ok. Gonna be work to print the names of the attirbutes. no important for now, so just print the attributes.
+Eh. I got it good enough with a table. But, IT WORKS!!
+
+
+Ok. On to working with forms.
+For starters, I'm going to set up ncat -l just so I can see what gets sent when a form is submitted
+Ok. It looks like there is way more in the request than just what what typed in. Lots of extra headers. But, that's looking at a post request. Let me change it to a Get request and run this again.
+
+Ok. As a get request, the first thing I see is that the path is not / like in the post request. It includes the values I typed into username and password as the path. Some of the headers are the same as post, but some are different. I'm fine chalking this up to the different natues of post and get request.
+But, one important thing...the Get request doesn't have a message body....
+Changing the name attribute of an element in HTML changes what gets quertied in the get request.
+Still a little confused. What determined which of the form values gets put into the request? I guess it depends on the type of request (and therefore how complicated it is?) and also how your server interprets that data? Like, maybe forms that perform GET actions always put all values into the path, and you just need to know that in order to have your server interpret it?
+That might just be the case. Even with the messageboard example, where you're typing in whatever, a GET request puts the message into the path, and a POST request puts it into the request body.
+
+Ok. Next up, try lesson6. HTML and forms. Boot up the html files he mentions, and listen to what the forms send using ncat -l. I'm guessing that GET requests will have all the form values in the path, and POST request will have all the values in the body....
+Correct!
+
+Working on messageboard server.
+First, make server that returns request body of post request.
+Done!
+
+Trying to test my code, but test isn't working.
+Had to re-install reqeusts using pip
+had to find pip
+did it
+now to install requests
+did it
+Try to run test, not working
+port 8000 full
+cleared it
+Test won't leave input up
+Had to do it in comman line
+
+Ok.I got it wrong. Let's see why
+Ok. Having issues with the !. It's weird. I would imagine that when you decode it, it would keep the ! intact.
+But, actually, isn't the decode for turning it from bytes into strings? And isn't what makes the ! into other stuff the way that http interprets it?
+Ok. So, first off, now my content lenght header was wrong, but I just got rid of that.
+As for the !, it's still not intuitive to me.ESPECIALLY not the way they did it. I think it makes sense that after defcoding the request, you need to further parse it so that it's in english, not in weird url-ese. But they fact that they parse it, reference the dictionary index, and then call the desired list from all that is just too many steps.
+There has to be a way to take the whole, decoded request and convert it, without having to do all the weird parse_qs.
+You know, I think I am ok assuming that there is (maybe I'm not ok with that), and just seeing parse_qs as a tool to use....
+
+You know, for now, I think I'm good. I gotta go home.
+When you come back, you're still on 8. a server for post.
+
+
+
+
